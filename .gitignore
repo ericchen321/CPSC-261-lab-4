@@ -1,0 +1,5 @@
+linked-list-test
+*.o
+*~
+*.swp
+*.swo
