@@ -69,7 +69,7 @@ void print_with_positions(s_list *list) {
   int position = 0;
   s_node *next_Node = list -> first;
 
-  while(next_Node->next!=NULL){
+  while(next_Node!=NULL){
     printf("Element: %ld, position: %d\n",(long)next_Node->value,position);
     next_Node=next_Node->next;
     position++;
@@ -94,7 +94,7 @@ long get_element_at(s_list *list, int position) {
   long value=LLONG_MIN;
   s_node *next_Node = list -> first;
 
-  while(next_Node->next!=NULL){
+  while(next_Node!=NULL){
     if(currPos == position){
         value=next_Node->value;
         break;
@@ -118,7 +118,16 @@ long get_element_at(s_list *list, int position) {
  */
 long get_sum_of_elements(s_list *list) {
   /* TO BE COMPLETED BY THE STUDENT. */
-  return 0;
+  long sum = 0;
+  s_node *next_Node = list -> first;
+
+  while(next_Node!=NULL){
+    sum+=next_Node->value;
+    printf("%ld\n",sum);
+    next_Node=next_Node->next;
+  }
+
+  return sum;
 }
 
 /*

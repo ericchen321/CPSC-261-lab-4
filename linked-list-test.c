@@ -1,7 +1,12 @@
 #include <stdio.h>
 #include "linked-list.h"
 
+typedef int bool;
+#define true 1
+#define false 0
+
 #define INITIAL_LENGTH 7
+#define SUM 
 
 int main(int argc, char *argv[]) {
   
@@ -17,9 +22,12 @@ int main(int argc, char *argv[]) {
   print_with_positions(mylist);
   long first = get_element_at(mylist,6);
   long second = get_element_at(mylist,5);
-  printf("%ld\n",first);
-  printf("%ld\n",second);
+  printf("This is not a valid position: %ld\n",first);
+  printf("Element at this pos is: %ld\n",second);
   free_list(mylist);
+
+
+  printf("the Sum is: %ld\n",get_sum_of_elements(mylist));
   
   return 0;
 }
