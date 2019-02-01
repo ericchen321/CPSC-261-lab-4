@@ -66,6 +66,15 @@ void insert_front(s_list *list, long value) {
  */
 void print_with_positions(s_list *list) {
   /* TO BE COMPLETED BY THE STUDENT. */
+  int position = 0;
+  s_node *next_Node = list -> first;
+
+  while(next_Node->next!=NULL){
+    printf("Element: %ld, position: %d\n",(long)next_Node->value,position);
+    next_Node=next_Node->next;
+    position++;
+  }
+
 }
 
 /*
@@ -81,7 +90,20 @@ void print_with_positions(s_list *list) {
  */
 long get_element_at(s_list *list, int position) {
   /* TO BE COMPLETED BY THE STUDENT. */
-  return 0;
+  int currPos = 0;
+  long value=LLONG_MIN;
+  s_node *next_Node = list -> first;
+
+  while(next_Node->next!=NULL){
+    if(currPos == position){
+        value=next_Node->value;
+        break;
+      }
+    next_Node=next_Node->next;
+    currPos++;
+  }
+
+  return value;
 }
 
 /*
