@@ -130,6 +130,17 @@ long get_sum_of_elements(s_list *list) {
   return sum;
 }
 
+/* 
+ * effects: free all nodes starting from given node
+ */
+void free_nodes(s_node *s_node){
+  if(s_node == NULL){
+    return;
+  }
+  free_nodes(s_node->next);
+  free(s_node);
+}
+
 /*
  * Function to delete a list and free all of its nodes (including the node struct).
  *
@@ -140,6 +151,8 @@ long get_sum_of_elements(s_list *list) {
  */
 void free_list(s_list *list) {
   /* TO BE COMPLETED BY THE STUDENT. */
+  free_nodes(list->first);
+  free(list);
 }
 
 /*

@@ -24,10 +24,11 @@ int main(int argc, char *argv[]) {
   long second = get_element_at(mylist,5);
   printf("This is not a valid position: %ld\n",first);
   printf("Element at this pos is: %ld\n",second);
-  free_list(mylist);
+  
 
 
   printf("the Sum is: %ld\n",get_sum_of_elements(mylist));
   
+  free_list(mylist);
   return 0;
 }
