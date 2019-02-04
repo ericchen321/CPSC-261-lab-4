@@ -18,8 +18,9 @@ int main(int argc, char *argv[]) {
     insert_front(mylist, contents[i]);
   }
   
-  print(mylist);
-  print_with_positions(mylist);
+  insert_at(mylist,1,6);
+  //print(mylist); 
+   print_with_positions(mylist);
   long first = get_element_at(mylist,6);
   long second = get_element_at(mylist,5);
   printf("This is not a valid position: %ld\n",first);

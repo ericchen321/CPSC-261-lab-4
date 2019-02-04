@@ -167,6 +167,26 @@ void free_list(s_list *list) {
  */
 int insert_at(s_list *list, int position, long value) {
   /* TO BE COMPLETED BY THE STUDENT. */
+  if(position == 0){
+    insert_front(list,value);
+  }
+  else if(position<=list->num_elements){
+    s_node* prev = list->first;
+    int currPos = 0; 
+    while(prev!=NULL){
+    if(currPos == position-1){
+        break;
+      }
+    prev = prev->next;
+    currPos++; 
+  }
+  s_node *curr = malloc(sizeof(s_node));
+  curr->next = prev->next;
+  curr->value = value;
+  prev->next = curr;
+  list->num_elements++;
+  return 1;
+  }
   return 0;
 }
 
