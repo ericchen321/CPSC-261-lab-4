@@ -66,15 +66,14 @@ void insert_front(s_list *list, long value) {
  */
 void print_with_positions(s_list *list) {
   /* TO BE COMPLETED BY THE STUDENT. */
-  int position = 0;
-  s_node *next_Node = list -> first;
+  int pos = 0;
+  s_node *cursor = list -> first;
 
-  while(next_Node!=NULL){
-    printf("Element: %ld, position: %d\n",(long)next_Node->value,position);
-    next_Node=next_Node->next;
-    position++;
+  while(cursor!=NULL){
+    printf("position: %d; element:%ld\n", pos, cursor->value);
+    cursor = cursor->next;
+    pos += 1;
   }
-
 }
 
 /*
