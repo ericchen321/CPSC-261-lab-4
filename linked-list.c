@@ -76,6 +76,20 @@ void print_with_positions(s_list *list) {
   }
 }
 
+long get_element_at_recursive(s_node* curr, int pos){
+  if(curr==NULL || pos<0){
+    return LLONG_MIN;
+  }
+  else if(pos==0){
+    return curr->value;
+  }
+  else
+  {
+    return get_element_at_recursive(curr->next, pos-1);
+  }
+  
+}
+
 /*
  * Function to retrieve the element at the position specified.
  *
@@ -89,20 +103,7 @@ void print_with_positions(s_list *list) {
  */
 long get_element_at(s_list *list, int position) {
   /* TO BE COMPLETED BY THE STUDENT. */
-  int currPos = 0;
-  long value=LLONG_MIN;
-  s_node *next_Node = list -> first;
-
-  while(next_Node!=NULL){
-    if(currPos == position){
-        value=next_Node->value;
-        break;
-      }
-    next_Node=next_Node->next;
-    currPos++;
-  }
-
-  return value;
+  return get_element_at_recursive(list->first, position);
 }
 
 /*
