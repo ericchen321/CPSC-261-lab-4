@@ -91,8 +91,8 @@ int main(int argc, char *argv[]) {
 
   initialize_test_lists(&test_list_0, &test_list_1, &test_list_2);
   // case: add a new node to the end of list 0 (non-empty list)
-  if(insert_at(test_list_0, 7, 9999)
-    && get_element_at(test_list_0, 0) == 2
+  if( insert_at(test_list_0, 7, 9999)
+      && get_element_at(test_list_0, 0) == 2
       && get_element_at(test_list_0, 1) == 4
       && get_element_at(test_list_0, 2) == -17
       && get_element_at(test_list_0, 3) == 13
@@ -144,5 +144,39 @@ int main(int argc, char *argv[]) {
   }
   free_list(test_list_0); free_list(test_list_1); free_list(test_list_2);
 
+  initialize_test_lists(&test_list_0, &test_list_1, &test_list_2);
+  // case: insert new node at  pos 3 in list 0
+  if(insert_at(test_list_0, 3, 555)
+      && get_element_at(test_list_0, 0) == 2
+      && get_element_at(test_list_0, 1) == 4
+      && get_element_at(test_list_0, 2) == -17
+      && get_element_at(test_list_0, 3) == 555
+      && get_element_at(test_list_0, 4) == 13
+      && get_element_at(test_list_0, 5) == -6
+      && get_element_at(test_list_0, 6) == 5
+      && get_element_at(test_list_0, 7) == 8
+      && test_list_0->num_elements == 8){}
+  else
+  {
+    printf("insert 555 to pos 3 in list 0 failed");
+  }
+
+  initialize_test_lists(&test_list_0, &test_list_1, &test_list_2);
+  // case: insert new node at  pos 6 in list 0
+  if(insert_at(test_list_0, 6, 3721)
+      && get_element_at(test_list_0, 0) == 2
+      && get_element_at(test_list_0, 1) == 4
+      && get_element_at(test_list_0, 2) == -17
+      && get_element_at(test_list_0, 3) == 13
+      && get_element_at(test_list_0, 4) == -6
+      && get_element_at(test_list_0, 5) == 5
+      && get_element_at(test_list_0, 6) == 3721
+      && get_element_at(test_list_0, 7) == 8
+      && test_list_0->num_elements == 8){}
+  else
+  {
+    printf("insert 3721 to pos 6 in list 0 failed");
+  }
+  
   return 0;
 }

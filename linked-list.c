@@ -165,7 +165,7 @@ int insert_at(s_list *list, int position, long value) {
   /* TO BE COMPLETED BY THE STUDENT. */
   if(position<0 
       || (list->num_elements == 0 && position != 0)
-      || (list->num_elements != 0 && position+1>list->num_elements)){
+      || (list->num_elements > 0 && position>list->num_elements)){
     return 0;
   }
 
