@@ -43,30 +43,106 @@ int main(int argc, char *argv[]) {
   initialize_test_lists(&test_list_0, &test_list_1, &test_list_2);
   print_with_positions(test_list_0);
   print_with_positions(test_list_1);
-  free_list(test_list_0);
-  free_list(test_list_1);
-  free_list(test_list_2);
+  free_list(test_list_0); free_list(test_list_1); free_list(test_list_2);
   
   // tests: get_element_at
   initialize_test_lists(&test_list_0, &test_list_1, &test_list_2);
   if(get_element_at(test_list_0, 5) != 5)
-    printf("get_element_at(test_list_0,5) failed");
+    printf("get_element_at(test_list_0,5) failed\n");
   if(get_element_at(test_list_0, 2) != -17)
-    printf("get_element_at(test_list_0, 2) failed");
+    printf("get_element_at(test_list_0, 2) failed\n");
   if(get_element_at(test_list_0, 7) != LLONG_MIN)
-    printf("get_element_at(test_list_0,9) failed");
+    printf("get_element_at(test_list_0,9) failed\n");
   if(get_element_at(test_list_0, -1) != LONG_MIN)
-    printf("get_element_at(test_list_0, -1) failed");
+    printf("get_element_at(test_list_0, -1) failed\n");
   if(get_element_at(test_list_1, 0) != 99)
-    printf("get_element_at(test_list_1, 0) failed");
+    printf("get_element_at(test_list_1, 0) failed\n");
   if(get_element_at(test_list_2, 0) != LONG_MIN)
-    printf("get_element_at(test_list_2, 0) failed");
-  free_list(test_list_0);
-  free_list(test_list_1);
-  free_list(test_list_2);
+    printf("get_element_at(test_list_2, 0) failed\n");
+  free_list(test_list_0); free_list(test_list_1); free_list(test_list_2);
 
   // tests: insert_at
+  initialize_test_lists(&test_list_0, &test_list_1, &test_list_2);
+  // case: insert new node at pos 0 in the empty list
+  if(insert_at(test_list_2, 0, 33) 
+      && get_element_at(test_list_2, 0) == 33
+      && test_list_2->num_elements == 1){}
+  else{
+    printf("insert 33 to empty list failed\n");
+  }
+  free_list(test_list_0); free_list(test_list_1); free_list(test_list_2);
 
-  
+  initialize_test_lists(&test_list_0, &test_list_1, &test_list_2);
+  // case: insert new node at pos 0 in list 0 (non-empty list)
+  if(insert_at(test_list_0, 0, 161)
+      && get_element_at(test_list_0, 0) == 161
+      && get_element_at(test_list_0, 1) == 2
+      && get_element_at(test_list_0, 2) == 4
+      && get_element_at(test_list_0, 3) == -17
+      && get_element_at(test_list_0, 4) == 13
+      && get_element_at(test_list_0, 5) == -6
+      && get_element_at(test_list_0, 6) == 5
+      && get_element_at(test_list_0, 7) == 8
+      && test_list_0->num_elements == 8){}
+  else{
+    printf("insert 161 to list 0 failed\n");
+  }
+  free_list(test_list_0); free_list(test_list_1); free_list(test_list_2);
+
+  initialize_test_lists(&test_list_0, &test_list_1, &test_list_2);
+  // case: add a new node to the end of list 0 (non-empty list)
+  if(insert_at(test_list_0, 7, 9999)
+    && get_element_at(test_list_0, 0) == 2
+      && get_element_at(test_list_0, 1) == 4
+      && get_element_at(test_list_0, 2) == -17
+      && get_element_at(test_list_0, 3) == 13
+      && get_element_at(test_list_0, 4) == -6
+      && get_element_at(test_list_0, 5) == 5
+      && get_element_at(test_list_0, 6) == 8
+      && get_element_at(test_list_0, 7) == 9999
+      && test_list_0->num_elements == 8){}
+  else
+  {
+    printf("insert 9999 to end of list 0 failed\n");
+  }
+  free_list(test_list_0); free_list(test_list_1); free_list(test_list_2);
+
+  initialize_test_lists(&test_list_0, &test_list_1, &test_list_2);
+  // case: insert new node at pos 1 in the empty list
+  if(!insert_at(test_list_2, 4, 11)
+      && test_list_2->num_elements == 0){}
+  else{
+    printf("empty list overflow insert test failed\n");
+  }
+  free_list(test_list_0); free_list(test_list_1); free_list(test_list_2);
+
+  initialize_test_lists(&test_list_0, &test_list_1, &test_list_2);
+  // case: insert new node at pos 8 in list 0
+  if(!insert_at(test_list_0, 8, 444)
+      && test_list_0->num_elements == 7
+      && get_element_at(test_list_0, 6) == 8){}
+  else{
+    printf("list 0 overflow insert test failed\n");
+  }
+  free_list(test_list_0); free_list(test_list_1); free_list(test_list_2);
+
+  initialize_test_lists(&test_list_0, &test_list_1, &test_list_2);
+  // case: insert new node at pos -1 in the empty lsit
+  if(!insert_at(test_list_2, -1, 222)
+    && test_list_2->num_elements == 0){}
+  else{
+    printf("empty list underflow insert test failed\n");
+  }
+  free_list(test_list_0); free_list(test_list_1); free_list(test_list_2);
+
+  initialize_test_lists(&test_list_0, &test_list_1, &test_list_2);
+  // case: insert new node at pos -1 in list 1
+  if(!insert_at(test_list_1, -1, 355)
+      && test_list_1->num_elements == 1){}
+  else{
+    printf("one element underflow insert test failed\n");
+  }
+  free_list(test_list_0); free_list(test_list_1); free_list(test_list_2);
+
   return 0;
 }

@@ -70,12 +70,17 @@ void print_with_positions(s_list *list) {
   s_node *cursor = list -> first;
 
   while(cursor!=NULL){
-    printf("position: %d; element:%ld\n", pos, cursor->value);
+    printf("position: %d; element: %ld\n", pos, cursor->value);
     cursor = cursor->next;
     pos += 1;
   }
 }
 
+/*
+ * effects:
+ *     returns the value of the element at the offset starting
+ *     from curr. If curr is null or offset<0 then return LLONG_MIN
+ */
 long get_element_at_recursive(s_node* curr, int pos){
   if(curr==NULL || pos<0){
     return LLONG_MIN;
@@ -118,16 +123,7 @@ long get_element_at(s_list *list, int position) {
  */
 long get_sum_of_elements(s_list *list) {
   /* TO BE COMPLETED BY THE STUDENT. */
-  long sum = 0;
-  s_node *next_Node = list -> first;
-
-  while(next_Node!=NULL){
-    sum+=next_Node->value;
-    printf("%ld\n",sum);
-    next_Node=next_Node->next;
-  }
-
-  return sum;
+  return 0;
 }
 
 /* 
@@ -167,27 +163,34 @@ void free_list(s_list *list) {
  */
 int insert_at(s_list *list, int position, long value) {
   /* TO BE COMPLETED BY THE STUDENT. */
-  if(position == 0){
-    insert_front(list,value);
+  if(position<0 
+      || (list->num_elements == 0 && position != 0)
+      || (list->num_elements != 0 && position+1>list->num_elements)){
+    return 0;
   }
-  else if(position<=list->num_elements){
-    s_node* prev = list->first;
-    int currPos = 0; 
-    while(prev!=NULL){
-    if(currPos == position-1){
-        break;
-      }
-    prev = prev->next;
-    currPos++; 
+
+  if(position==0){
+    s_node* new_node = malloc(sizeof(s_node));
+    new_node->value = value;
+    new_node->next = list->first;
+    list->first = new_node;
+    list->num_elements += 1;
+    return 1;
   }
-  s_node *curr = malloc(sizeof(s_node));
-  curr->next = prev->next;
-  curr->value = value;
-  prev->next = curr;
-  list->num_elements++;
-  return 1;
+  else{
+    int i = 0;
+    s_node* cursor = list->first;
+    while(cursor!=NULL && i<position-1){
+      cursor = cursor->next;
+      i+=1;
+    }
+    s_node* new_node = malloc(sizeof(s_node));
+    new_node->value = value;
+    new_node->next = cursor->next;
+    cursor->next = new_node;
+    list->num_elements += 1;
+    return 1;
   }
-  return 0;
 }
 
 /*
