@@ -116,6 +116,7 @@ int main(int argc, char *argv[]) {
       && get_element_at(list_2, 0) == 33
       && list_2->num_elements == 1){}
   else{
+    print_with_positions(list_2);
     printf("insert 33 to empty list failed\n");
   }
   free_list(list_0); free_list(list_1); free_list(list_2); free_list(list_3); free_list(list_4); free_list(list_5);

@@ -154,6 +154,7 @@ void free_list(s_list *list) {
   free(list);
 }
 
+
 /*
  * Function to insert a new element at given position.
  *
@@ -164,8 +165,8 @@ void free_list(s_list *list) {
  * Returns
  *     1 if successful, 0 if the position is out of range.
  */
-int insert_at(s_list *list, int position, long value) {
-  /* TO BE COMPLETED BY THE STUDENT. */
+/*int insert_at(s_list *list, int position, long value) {
+
   if(position<0 
       || (list->num_elements == 0 && position != 0)
       || (list->num_elements > 0 && position>list->num_elements)){
@@ -195,6 +196,7 @@ int insert_at(s_list *list, int position, long value) {
     return 1;
   }
 }
+*/
 
 /*
  * Function to insert a new element at given position.
@@ -205,11 +207,13 @@ int insert_at(s_list *list, int position, long value) {
  *     the value of the new element.
  * Returns
  *     1 if successful, 0 if the position is out of range.
+ */
 int insert_at(s_list *list, int position, long value) {
   if(position == 0){
     insert_front(list,value);
+    return 1;
   }
-  else if(position<=list->num_elements){
+  else if(position<=list->num_elements && position >0){
     s_node* prev = list->first;
     int currPos = 0; 
     while(prev!=NULL){
@@ -228,7 +232,7 @@ int insert_at(s_list *list, int position, long value) {
   }
   return 0;
 }
- */
+ 
 
 /*
  * Function to insert a list inside another list. The list being inserted
