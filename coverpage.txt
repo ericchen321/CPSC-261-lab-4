@@ -30,10 +30,10 @@ Email: chenguanxiong@alumni.ubc.ca
 
 
 STUDENT  2
-Name :
-St. No:
-Unix Id :
-Email:
+Name : Siddhantha Bose
+St. No: 72127467
+Unix Id : j1o1b
+Email: siddhanthab1@gmail.com
 
 
 ACKNOWLEDGMENTS, COMMENTS AND CITATIONS :
