@@ -243,7 +243,56 @@ int insert_at(s_list *list, int position, long value) {
  */
 int insert_list_at(s_list *list, int position, s_list *other_list) {
   /* TO BE COMPLETED BY THE STUDENT. */
-  return 0;
+
+  // case: invalid pos
+  if(position<0
+      || (position!=0 && list->num_elements==0)
+      || (position>list->num_elements && list->num_elements>0)){
+      return 0;
+  }
+
+  // case: other_list is empty
+  if(other_list->num_elements == 0){
+    free_list(other_list);
+    return 1;
+  }
+
+  // case: other list is non-empty and this list is empty
+  if(list->num_elements == 0){
+    list->first = other_list->first;
+    list->num_elements = other_list->num_elements;
+    free(other_list);
+    return 1;
+  }
+
+  // for cases below, pos is valid, either list has >=1 elements
+  if (position == 0){
+    s_node* temp = list->first;
+    list->first = other_list->first;
+    s_node* target_cursor = list->first;
+    while(target_cursor->next != NULL){
+      target_cursor = target_cursor->next;
+    }
+    target_cursor->next = temp;
+  }
+  else{
+    int i;
+    s_node* target_cursor = list->first;
+    s_node* temp;
+    for(i=0; i<position-1; i++){
+      target_cursor = target_cursor->next;
+    }
+    temp = target_cursor->next;
+    target_cursor->next = other_list->first;
+    while(target_cursor->next != NULL){
+      target_cursor = target_cursor->next;
+    }
+    target_cursor->next = temp;
+  }
+  list->num_elements = list->num_elements + other_list->num_elements;
+  free(other_list);
+  
+  return 1;
 }
 
 /*
