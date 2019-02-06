@@ -123,7 +123,6 @@ long get_sum_of_elements(s_list *list) {
 
   while(next_Node!=NULL){
     sum+=next_Node->value;
-    printf("%ld\n",sum);
     next_Node=next_Node->next;
   }
 

@@ -43,6 +43,7 @@ int main(int argc, char *argv[]) {
   initialize_test_lists(&test_list_0, &test_list_1, &test_list_2);
   print_with_positions(test_list_0);
   print_with_positions(test_list_1);
+  print_with_positions(test_list_2);
   free_list(test_list_0); free_list(test_list_1); free_list(test_list_2);
   
   // tests: get_element_at
@@ -59,6 +60,31 @@ int main(int argc, char *argv[]) {
     printf("get_element_at(test_list_1, 0) failed\n");
   if(get_element_at(test_list_2, 0) != LONG_MIN)
     printf("get_element_at(test_list_2, 0) failed\n");
+  free_list(test_list_0); free_list(test_list_1); free_list(test_list_2);
+
+  // tests: get_sum_of_elements
+  initialize_test_lists(&test_list_0, &test_list_1, &test_list_2);
+  // case: sum of list 0 (non-empty list)
+  if(get_sum_of_elements(test_list_0) == 9){}
+  else{
+    printf("get sum of list 0 failed\n");
+  }
+  free_list(test_list_0); free_list(test_list_1); free_list(test_list_2);
+
+  initialize_test_lists(&test_list_0, &test_list_1, &test_list_2);
+  // case: sum of list 1 (one-element list)
+  if(get_sum_of_elements(test_list_1) == 99){}
+  else{
+    printf("get sum of list 1 failed\n");
+  }
+  free_list(test_list_0); free_list(test_list_1); free_list(test_list_2);
+
+  initialize_test_lists(&test_list_0, &test_list_1, &test_list_2);
+  // case: sum of empty list
+  if(get_sum_of_elements(test_list_2) == 0){}
+  else{
+    printf("get sum of empty list failed\n");
+  }
   free_list(test_list_0); free_list(test_list_1); free_list(test_list_2);
 
   // tests: insert_at
@@ -160,6 +186,7 @@ int main(int argc, char *argv[]) {
   {
     printf("insert 555 to pos 3 in list 0 failed");
   }
+  free_list(test_list_0); free_list(test_list_1); free_list(test_list_2);
 
   initialize_test_lists(&test_list_0, &test_list_1, &test_list_2);
   // case: insert new node at  pos 6 in list 0
@@ -177,6 +204,7 @@ int main(int argc, char *argv[]) {
   {
     printf("insert 3721 to pos 6 in list 0 failed");
   }
+  free_list(test_list_0); free_list(test_list_1); free_list(test_list_2);
   
   return 0;
 }
