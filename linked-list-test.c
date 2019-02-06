@@ -246,6 +246,19 @@ int main(int argc, char *argv[]) {
   free_list(list_0); free_list(list_1); free_list(list_3); free_list(list_4); free_list(list_5);
 
   initialize_lists(&list_0, &list_1, &list_2, &list_3, &list_4, &list_5);
+  // case: valid pos, insert non-empty list to start of empty target list
+  insert_success = insert_list_at(list_2, 0, list_5);
+  if(insert_success
+      && list_2->num_elements == 3
+      && get_element_at(list_2, 0) == 33
+      && get_element_at(list_2, 1) == 500
+      && get_element_at(list_2, 2) == -52){}
+  else{
+    printf("insert non-empty list to start of empty target list failed\n");
+  }
+  free_list(list_0); free_list(list_1); free_list(list_2); free_list(list_3); free_list(list_4);
+
+  initialize_lists(&list_0, &list_1, &list_2, &list_3, &list_4, &list_5);
   // case: valid pos, insert one element list to front of one element list
   insert_success = insert_list_at(list_1, 0, list_3);
   if(insert_success
