@@ -325,7 +325,7 @@ int main(int argc, char *argv[]) {
   insert_success = insert_list_at(list_2, 1, list_5);
   if(!insert_success
       && list_2->num_elements == 0
-      && list_5->num_elements == 5){}
+      && list_5->num_elements == 3){}
   else
   {
     printf("insert list position != 0 when target list is empty test failed\n");
