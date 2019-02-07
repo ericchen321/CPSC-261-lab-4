@@ -231,7 +231,14 @@ int main(int argc, char *argv[]) {
 
   // tests: insert_list_at
   int insert_success;
-  // TODO: need to test inserting empty list to empty list
+  // case: valid pos(=0), insert empty list to empty list
+  insert_success = insert_list_at(list_2, 0, list_4);
+  if(insert_success
+      && list_2->num_elements == 0){}
+  else{
+    printf("insert empty list to start of empty list failed\n");
+  }
+  free_list(list_0); free_list(list_1); free_list(list_2); free_list(list_3); free_list(list_5);  
 
   initialize_lists(&list_0, &list_1, &list_2, &list_3, &list_4, &list_5);
   // case: valid pos, insert empty list to non-empty list
@@ -324,7 +331,7 @@ int main(int argc, char *argv[]) {
   free_list(list_0); free_list(list_1); free_list(list_2); free_list(list_3); free_list(list_4);
 
   initialize_lists(&list_0, &list_1, &list_2, &list_3, &list_4, &list_5);
-  // case: invalid pos, position < 0 FIXME: now assuming other list untouched for invalid pos
+  // case: invalid pos, position < 0
   insert_success = insert_list_at(list_0, -1, list_5);
   if(!insert_success
       && list_0->num_elements == 7
@@ -357,5 +364,135 @@ int main(int argc, char *argv[]) {
   }
   free_list(list_0); free_list(list_1); free_list(list_2); free_list(list_3); free_list(list_4); free_list(list_5);
   
+  // tests: extract_sublist
+  s_list* sublist;
+
+  initialize_lists(&list_0, &list_1, &list_2, &list_3, &list_4, &list_5);
+  // case: invalid starting pos
+  sublist = extract_sublist(list_0, -1, 2);
+  if(sublist == NULL
+      && list_0->num_elements == 0){}
+  else{
+    printf("extract sublist given invalid starting pos test failed\n");
+  }
+  free_list(list_0); free_list(list_1); free_list(list_2); free_list(list_3); free_list(list_4); free_list(list_5);
+
+  initialize_lists(&list_0, &list_1, &list_2, &list_3, &list_4, &list_5);
+  // case: invalid num of elements to extract, when given list is empty
+  sublist = extract_sublist(list_2, 0, 1);
+  if(sublist == NULL
+      && list_0->num_elements == 0 ){}
+  else{
+    printf("extract sublist given invalid num of element, given empty list test failed\n");
+  }
+  free_list(list_0); free_list(list_1); free_list(list_2); free_list(list_3); free_list(list_4); free_list(list_5);
+
+  initialize_lists(&list_0, &list_1, &list_2, &list_3, &list_4, &list_5);
+  // case: invalid num of elements to extract, when given list is non-empty
+  sublist = extract_sublist(list_5, 0, 4);
+  if(sublist == NULL
+      && list_5->num_elements == 0){}
+  else{
+    printf("extract sublist given invalid num of elements, given non-empty list test failed\n");
+  }
+  free_list(list_0); free_list(list_1); free_list(list_2); free_list(list_3); free_list(list_4); free_list(list_5);
+
+  initialize_lists(&list_0, &list_1, &list_2, &list_3, &list_4, &list_5);
+  // case: all inputs valid, extract nothing from empty list
+  sublist = extract_sublist(list_2, 0, 0);
+  if(sublist->num_elements == 0
+      && list_2->num_elements == 0){}
+  else{
+    printf("extract 0 elements starting from pos 0, from empty list test failed\n");
+  }
+  free_list(list_0); free_list(list_1); free_list(list_2); free_list(list_3); free_list(list_4); free_list(list_5); free_list(sublist);
+
+  initialize_lists(&list_0, &list_1, &list_2, &list_3, &list_4, &list_5);
+  // case: all inputs valid, extract nothing from multi-element list
+  sublist = extract_sublist(list_0, 2, 0);
+  if(sublist->num_elements == 0
+      && list_0->num_elements == 7){}
+  else{
+    printf("extract nothing from multi-element list failed\n");
+  }
+  free_list(list_0); free_list(list_1); free_list(list_2); free_list(list_3); free_list(list_4); free_list(list_5); free_list(sublist);
+
+  initialize_lists(&list_0, &list_1, &list_2, &list_3, &list_4, &list_5);
+  // case: all inputs valid, extract list_5[0]
+  sublist = extract_sublist(list_5, 0, 1);
+  if(sublist->num_elements == 1
+      && get_element_at(sublist, 0) == 33
+      && list_5->num_elements == 2
+      && get_element_at(list_5, 0) == 500
+      && get_element_at(list_5, 1) == -52){}
+  else{
+    printf("extract one element from start of multi-element list failed\n");
+  }
+  free_list(list_0); free_list(list_1); free_list(list_2); free_list(list_3); free_list(list_4); free_list(list_5); free_list(sublist);
+
+  initialize_lists(&list_0, &list_1, &list_2, &list_3, &list_4, &list_5);
+  // case: all inputs valid, extract list_5[2]
+  sublist = extract_sublist(list_5, 2, 1);
+  if(sublist->num_elements == 1
+      && get_element_at(sublist, 0) == -52
+      && list_5->num_elements == 2
+      && get_element_at(list_5, 0) == 33
+      && get_element_at(list_5, 1) == 500){}
+  else{
+    printf("extract one element from end of multi-element list failed\n");
+  }
+  free_list(list_0); free_list(list_1); free_list(list_2); free_list(list_3); free_list(list_4); free_list(list_5); free_list(sublist);
+
+  initialize_lists(&list_0, &list_1, &list_2, &list_3, &list_4, &list_5);
+  // case: all inputs valid, extract list_0[0:3]
+  sublist = extract_sublist(list_0, 0, 4);
+  if(sublist->num_elements == 4
+      && get_element_at(sublist, 0) == 2
+      && get_element_at(sublist, 1) == 4
+      && get_element_at(sublist, 2) == -17
+      && get_element_at(sublist, 3) == 13
+      && list_0->num_elements == 3
+      && get_element_at(list_0, 0) == -6
+      && get_element_at(list_0, 1) == 5
+      && get_element_at(list_0, 2) == 8){}
+  else{
+    printf("extract multiple elements from start of multi-element list failed\n");
+  }
+  free_list(list_0); free_list(list_1); free_list(list_2); free_list(list_3); free_list(list_4); free_list(list_5); free_list(sublist);
+
+  initialize_lists(&list_0, &list_1, &list_2, &list_3, &list_4, &list_5);
+  // case: all inputs valid, extract list_0[3:6]
+  sublist = extract_sublist(list_0, 3, 4);
+  if(sublist->num_elements == 4
+      && get_element_at(sublist, 0) == 13
+      && get_element_at(sublist, 1) == -6
+      && get_element_at(sublist, 2) == 5
+      && get_element_at(sublist, 3) == 8
+      && list_0->num_elements == 3
+      && get_element_at(list_0, 0) == 2
+      && get_element_at(list_0, 1) == 4
+      && get_element_at(list_0, 2) == -17){}
+  else{
+    printf("extract multiple elements from end of multi-element list failed\n");
+  }
+  free_list(list_0); free_list(list_1); free_list(list_2); free_list(list_3); free_list(list_4); free_list(list_5); free_list(sublist);
+
+  initialize_lists(&list_0, &list_1, &list_2, &list_3, &list_4, &list_5);
+  // case: all inputs valid, extract list_0[2:5]
+  sublist = extract_sublist(list_0, 2, 4);
+  if(sublist->num_elements == 4
+      && get_element_at(sublist, 0) == -17
+      && get_element_at(sublist, 1) == 13
+      && get_element_at(sublist, 2) == -6
+      && get_element_at(sublist, 3) == 5
+      && list_0->num_elements == 3
+      && get_element_at(list_0, 0) == 2
+      && get_element_at(list_0, 1) == 4
+      && get_element_at(list_0, 2) == 8){}
+  else{
+    printf("extract multiple elements from middle of multi-element list failed\n");
+  }
+  free_list(list_0); free_list(list_1); free_list(list_2); free_list(list_3); free_list(list_4); free_list(list_5); free_list(sublist);
+
   return 0;
 }
