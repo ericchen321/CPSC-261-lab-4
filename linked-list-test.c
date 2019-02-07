@@ -462,6 +462,25 @@ int main(int argc, char *argv[]) {
   if(sublist != NULL){free_list(sublist);}
 
   initialize_lists(&list_0, &list_1, &list_2, &list_3, &list_4, &list_5);
+  // case: all inputs valid, extract list_5[2]
+  sublist = extract_sublist(list_0, 3, 1);
+  if(sublist != NULL
+      && sublist->num_elements == 1
+      && get_element_at(sublist, 0) == 13
+      && list_0->num_elements == 6
+      && get_element_at(list_0, 0) == 2
+      && get_element_at(list_0, 1) == 4
+      && get_element_at(list_0, 2) == -17
+      && get_element_at(list_0, 3) == -6
+      && get_element_at(list_0, 4) == 5
+      && get_element_at(list_0, 5) == 8){}
+  else{
+    printf("extract one element from middle of multi-element list failed\n");
+  }
+  free_list(list_0); free_list(list_1); free_list(list_2); free_list(list_3); free_list(list_4); free_list(list_5);
+  if(sublist != NULL){free_list(sublist);}
+
+  initialize_lists(&list_0, &list_1, &list_2, &list_3, &list_4, &list_5);
   // case: all inputs valid, extract list_0[0:3]
   sublist = extract_sublist(list_0, 0, 4);
   if(sublist != NULL
@@ -517,6 +536,6 @@ int main(int argc, char *argv[]) {
   }
   free_list(list_0); free_list(list_1); free_list(list_2); free_list(list_3); free_list(list_4); free_list(list_5);
   if(sublist != NULL){free_list(sublist);}
-  
+
   return 0;
 }
