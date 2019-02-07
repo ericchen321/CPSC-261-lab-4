@@ -388,6 +388,16 @@ int main(int argc, char *argv[]) {
   free_list(list_0); free_list(list_1); free_list(list_2); free_list(list_3); free_list(list_4); free_list(list_5);
 
   initialize_lists(&list_0, &list_1, &list_2, &list_3, &list_4, &list_5);
+  // case: invalid num of elements to extract, num<0
+  sublist = extract_sublist(list_0, 0, -1);
+  if(sublist == NULL
+      && list_0->num_elements == 7){}
+  else{
+    printf("extract sublist given invalid num of element, given num<0 test failed\n");
+  }
+  free_list(list_0); free_list(list_1); free_list(list_2); free_list(list_3); free_list(list_4); free_list(list_5);
+
+  initialize_lists(&list_0, &list_1, &list_2, &list_3, &list_4, &list_5);
   // case: invalid num of elements to extract, when given list is empty
   sublist = extract_sublist(list_2, 0, 1);
   if(sublist == NULL
