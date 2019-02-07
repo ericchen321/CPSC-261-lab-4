@@ -154,7 +154,6 @@ void free_list(s_list *list) {
   free(list);
 }
 
-
 /*
  * Function to insert a new element at given position.
  *
@@ -315,5 +314,47 @@ int insert_list_at(s_list *list, int position, s_list *other_list) {
  */
 s_list *extract_sublist(s_list *list, int position, int nb_of_elements) {
   /* TO BE COMPLETED BY THE STUDENT. */
-  return NULL;
+  if(position<0
+      || (list->num_elements==0 && position!=0)
+      || nb_of_elements<0
+      || (list->num_elements==0 && nb_of_elements!=0)
+      || (position+nb_of_elements > list->num_elements)){
+    return NULL;
+  }
+
+  // for cases below, pos is valid
+  // case: extract no elements
+  if(nb_of_elements == 0){
+    return create_list();
+  }
+
+  // case: extract >= 1 elements; list has >= 1 elements
+  int i;
+  s_list *sublist = create_list();
+  if(position==0){
+    sublist->first = list->first;
+    s_node *sub_cursor=sublist->first;
+    for(i=0; i<nb_of_elements-1; i++){
+      sub_cursor = sub_cursor->next;
+    }
+    list->first = sub_cursor->next;
+    sub_cursor->next = NULL;
+  }
+  else{
+    s_node *list_cursor = list->first;
+    s_node *sub_cursor;
+    for(i=0; i<position-1; i++){
+      list_cursor = list_cursor->next;
+    }
+    sublist->first = list_cursor->next;
+    sub_cursor = sublist->first;
+    for(i=0; i<nb_of_elements-1; i++){
+      sub_cursor = sub_cursor->next;
+    }
+    list_cursor->next = sub_cursor->next;
+    sub_cursor->next = NULL;
+  }
+  sublist->num_elements = nb_of_elements;
+  list->num_elements = list->num_elements - nb_of_elements;
+  return sublist;
 }
